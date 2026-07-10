@@ -9,7 +9,7 @@ window.onload = () => {
 
 formulario.addEventListener("submit", async (event) => {
 
-    event.preventDefault();
+    event.preventDefault(); // Evita que o formulário seja enviado de forma tradicional
 
     const consulta = {
         paciente: document.getElementById("paciente").value,
@@ -21,6 +21,7 @@ formulario.addEventListener("submit", async (event) => {
 
     try {
 
+        // Envia a requisição POST para a API com os dados da consulta
         const resposta = await fetch(API, {
             method: "POST",
             headers: {
@@ -29,6 +30,7 @@ formulario.addEventListener("submit", async (event) => {
             body: JSON.stringify(consulta)
         });
 
+        // Verifica se a resposta da API foi bem-sucedida
         if (!resposta.ok) {
 
             const erro = await resposta.json();
@@ -37,7 +39,7 @@ formulario.addEventListener("submit", async (event) => {
 
             return;
         }
-
+        // se der ceto, limpa o formulário e atualiza a lista de consultas
         formulario.reset();
 
         listarConsultas();
